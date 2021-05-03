@@ -21,11 +21,14 @@ const Content = styled.div`
 `
 const InputTwo = styled(InputOne)``
 function App() {
-  const [low , setLow] = useState(0)
-  const [high , setHigh] = useState(1)
-  const [output , setOutput] = useState(0)
+  const [low , setLow] = useState()
+  const [high , setHigh] = useState()
+  const [output , setOutput] = useState()
+
   const handleOutput = () => {
-    setOutput(Math.floor(Math.random()*(high-low+1)+low))
+
+      var rand = Math.round((Math.random() * (high - low)) + low)
+      rand <= low || rand >= high ? rand = "failed" : setOutput(rand)
   }
   return (
      <>
@@ -35,9 +38,9 @@ function App() {
               <p id ="output">{output}</p>
               </Content>
               <label htmlFor="input1">Low Range</label>
-              <InputOne type = "text" id = "input1" onChange = {(e) => setLow(e.target.value)}/>
-              <label htmlFor="input2">High Range</label>
-              <InputTwo type = "text"  id = "input2" onChange = {(e) => setHigh(e.target.value)}/>
+              <InputOne type = "number" id = "input1" onChange = {(e) => setLow(e.target.value)}/>
+              <label htmlFor="input2">High Range</label>  
+              <InputTwo type = "number"  id = "input2" onChange = {(e) => setHigh(e.target.value)}/>
               <Button onClick = {handleOutput}>Get Random Number</Button>
               
           </Main>
