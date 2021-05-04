@@ -10,37 +10,46 @@ const Main = styled.body`
 `
 const Button = styled.button`
   background-color:#94F700;
+  padding: 10px;
+  border-radius : 60px;
+  margin-top : 30px;
   color: #0B0E11;
-  margin-left:100px;
+
 `
 const InputOne = styled.input`
   margin-left : 10px;  
 `
-const Content = styled.div`
-  margin-left:100px;
+const InnerResult = styled.h1`
+margin-bottom : 30px;
+`
+const OriginalContent = styled.div`
+display : flex;
+gap : 50px;
+flex-direction : row;
 `
 const InputTwo = styled(InputOne)``
 function App() {
-  const [low , setLow] = useState()
-  const [high , setHigh] = useState()
-  const [output , setOutput] = useState()
+  const [low , setLow] = useState(0)
+  const [high , setHigh] = useState(10)
+  const [output , setOutput] = useState(5)
 
-  const handleOutput = () => {
+ function handleOutput(){
 
-      var rand = Math.round((Math.random() * (high - low)) + low)
-      rand <= low || rand >= high ? rand = "failed" : setOutput(rand)
+      setOutput(Math.round((Math.random() * (high - low )) + low))
+      
   }
   return (
      <>
           <Main>
-            <Content>
-              <label htmlFor="output">Random Output is : </label>
-              <p id ="output">{output}</p>
-              </Content>
-              <label htmlFor="input1">Low Range</label>
-              <InputOne type = "number" id = "input1" onChange = {(e) => setLow(e.target.value)}/>
-              <label htmlFor="input2">High Range</label>  
-              <InputTwo type = "number"  id = "input2" onChange = {(e) => setHigh(e.target.value)}/>
+            
+              <InnerResult>Random Number  is : {output}
+              </InnerResult>
+              <OriginalContent>
+              <p>Min Number : </p>
+              <InputOne type = "number" placeholder = {low} onChange = {(e) => setLow(+e.target.value)}/>
+              <p>Max Number : </p>
+              <InputTwo type = "number"  placeholder = {high} onChange = {(e) => setHigh(+e.target.value)}/>
+              </OriginalContent>
               <Button onClick = {handleOutput}>Get Random Number</Button>
               
           </Main>
